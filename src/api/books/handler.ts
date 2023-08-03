@@ -56,7 +56,7 @@ const addBookHandler = async (request: Request, h: ResponseToolkit) => {
 
   await newBooks.save();
 
-  const isSuccess = await Books.findOne({ id: id });
+  const isSuccess = await Books.findOne({ id });
 
   if (isSuccess) {
     const response = h.response({
@@ -84,7 +84,7 @@ const getAllBooksHandler = async (request: Request, h: ResponseToolkit) => {
 
   if (books.length > 0) {
     if (name !== undefined) {
-      const books = await Books.find({ name: name });
+      const books = await Books.find({ name });
 
       if (books.length > 0) {
         const response = h.response({
@@ -167,9 +167,9 @@ const getAllBooksHandler = async (request: Request, h: ResponseToolkit) => {
 };
 
 const getBookByIdHandler = async (request: Request, h: ResponseToolkit) => {
-  const { id } = request.params as IBook;
+  const { id } = request.params;
 
-  const books = await Books.findOne({ id: id });
+  const books = await Books.findOne({ id });
 
   if (books) {
     const response = h.response({
@@ -191,7 +191,7 @@ const getBookByIdHandler = async (request: Request, h: ResponseToolkit) => {
 };
 
 const updateBookByIdHandler = async (request: Request, h: ResponseToolkit) => {
-  const { id } = request.params as IBook;
+  const { id } = request.params;
 
   const {
     name,
@@ -225,13 +225,13 @@ const updateBookByIdHandler = async (request: Request, h: ResponseToolkit) => {
     return response;
   }
 
-  const books = await Books.findOne({ id: id });
+  const books = await Books.findOne({ id });
 
   if (books) {
     const finished = pageCount === readPage;
 
     const updateBooks = await Books.updateOne(
-      { id: id },
+      { id },
       {
         name,
         year,
@@ -265,12 +265,12 @@ const updateBookByIdHandler = async (request: Request, h: ResponseToolkit) => {
 };
 
 const deleteBookByIdHandler = async (request: Request, h: ResponseToolkit) => {
-  const { id } = request.params as IBook;
+  const { id } = request.params;
 
-  const books = await Books.findOne({ id: id });
+  const books = await Books.findOne({ id });
 
   if (books) {
-    const deleteBooks = await Books.deleteOne({ id: id });
+    const deleteBooks = await Books.deleteOne({ id });
 
     if (deleteBooks) {
       const response = h.response({

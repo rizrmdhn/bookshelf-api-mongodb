@@ -1,4 +1,4 @@
-import { Server, Request, ResponseToolkit } from "@hapi/hapi";
+import { Server } from "@hapi/hapi";
 import routes from "./api/books/routes.js";
 import connect from "./utils/db.js";
 
